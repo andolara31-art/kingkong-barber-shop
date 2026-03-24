@@ -90,7 +90,7 @@ export default function Navbar() {
             style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', textDecoration: 'none', cursor: 'none' }}
           >
             <div style={{ width: 44, height: 44, borderRadius: '50%', overflow: 'hidden', border: '1.5px solid rgba(255,255,255,0.2)', flexShrink: 0 }}>
-              <img src="/images/logo.jpg" alt="King Kong Barber Shop" style={{ width: '100%', height: '100%', objectFit: 'cover' }} loading="eager" />
+              <img src="https://fwjdikkenbolqnyadgyq.supabase.co/storage/v1/object/sign/ima/WhatsApp%20Image%202026-03-21%20at%201.41.46%20PM.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9jNTU1MzE4Ny1lNWQ2LTQyN2ItYjQzZi1kZjVlZWE4MzAwZGEiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWEvV2hhdHNBcHAgSW1hZ2UgMjAyNi0wMy0yMSBhdCAxLjQxLjQ2IFBNLmpwZWciLCJpYXQiOjE3NzQzOTE1NTMsImV4cCI6MTgwNTkyNzU1M30.gx2xn4FIxmWA2SGi1CFGpFjlkz5SX6qSdIZx_eYrp1k" alt="King Kong Barber Shop Logo" style={{ width: '100%', height: '100%', objectFit: 'contain', backgroundColor: 'transparent' }} loading="eager" />
             </div>
             <div>
               <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.25rem', letterSpacing: '0.1em', color: '#F5F5F5', lineHeight: 1 }}>KING KONG</div>
