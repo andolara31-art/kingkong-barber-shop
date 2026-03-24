@@ -4,9 +4,9 @@ import { motion, useInView } from 'framer-motion'
 const WA_LINK = 'https://wa.me/50661703398?text=Hola%20King%20Kong%20Barber%20Shop%2C%20quiero%20reservar%20una%20cita%20%F0%9F%92%88'
 
 const schedule = [
-  { days: 'Lunes — Viernes', hours: '9:00 AM – 8:00 PM', note: '' },
-  { days: 'Sábados', hours: '8:00 AM – 8:00 PM', note: '' },
-  { days: 'Domingos', hours: '9:00 AM – 3:00 PM', note: '' },
+  { days: 'Lunes — Viernes', hours: '9:00 AM – 8:00 PM' },
+  { days: 'Sábados',         hours: '8:00 AM – 8:00 PM' },
+  { days: 'Domingos',        hours: '9:00 AM – 3:00 PM' },
 ]
 
 export default function Schedule() {
@@ -18,23 +18,22 @@ export default function Schedule() {
       id="horarios"
       ref={ref}
       style={{
-        backgroundColor: '#C9A84C',
+        backgroundColor: '#111111',
         padding: 'clamp(4rem, 8vw, 7rem) 0',
         position: 'relative',
         overflow: 'hidden',
+        borderTop: '1px solid rgba(255,255,255,0.06)',
       }}
     >
-      {/* Background texture */}
+      {/* Subtle grid texture */}
       <div style={{
         position: 'absolute',
         inset: 0,
         backgroundImage: `repeating-linear-gradient(
-          45deg,
-          transparent,
-          transparent 60px,
-          rgba(0,0,0,0.03) 60px,
-          rgba(0,0,0,0.03) 61px
+          45deg, transparent, transparent 60px,
+          rgba(255,255,255,0.015) 60px, rgba(255,255,255,0.015) 61px
         )`,
+        pointerEvents: 'none',
       }} />
 
       <div className="container-site" style={{ position: 'relative', zIndex: 1 }}>
@@ -44,21 +43,15 @@ export default function Schedule() {
           gap: '3rem',
           alignItems: 'center',
         }}>
+
           {/* Left: Schedule */}
           <div>
             <motion.p
               initial={{ opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5 }}
-              style={{
-                fontFamily: 'var(--font-body)',
-                fontSize: '0.6875rem',
-                fontWeight: 700,
-                letterSpacing: '0.2em',
-                textTransform: 'uppercase',
-                color: 'rgba(10,10,10,0.6)',
-                marginBottom: '0.75rem',
-              }}
+              className="section-label"
+              style={{ marginBottom: '0.75rem' }}
             >
               Horarios
             </motion.p>
@@ -71,11 +64,12 @@ export default function Schedule() {
                 fontFamily: 'var(--font-display)',
                 fontSize: 'clamp(2.25rem, 5vw, 4rem)',
                 lineHeight: 0.95,
-                color: '#0A0A0A',
+                color: '#F5F5F5',
                 marginBottom: '2rem',
               }}
             >
-              ABIERTO<br />PARA TI
+              ABIERTO<br />
+              <span style={{ color: '#FFFFFF' }}>PARA TI</span>
             </motion.h2>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
@@ -90,15 +84,15 @@ export default function Schedule() {
                     justifyContent: 'space-between',
                     alignItems: 'center',
                     padding: '1rem 0',
-                    borderBottom: i < schedule.length - 1 ? '1px solid rgba(10,10,10,0.12)' : 'none',
+                    borderBottom: i < schedule.length - 1 ? '1px solid rgba(255,255,255,0.07)' : 'none',
                     gap: '1rem',
                   }}
                 >
                   <span style={{
                     fontFamily: 'var(--font-body)',
                     fontSize: '0.9375rem',
-                    fontWeight: 600,
-                    color: '#0A0A0A',
+                    fontWeight: 500,
+                    color: '#AAAAAA',
                   }}>
                     {item.days}
                   </span>
@@ -106,7 +100,7 @@ export default function Schedule() {
                     fontFamily: 'var(--font-display)',
                     fontSize: '1.125rem',
                     letterSpacing: '0.04em',
-                    color: '#0A0A0A',
+                    color: '#F5F5F5',
                     textAlign: 'right',
                   }}>
                     {item.hours}
@@ -123,7 +117,7 @@ export default function Schedule() {
                 marginTop: '1.25rem',
                 fontFamily: 'var(--font-body)',
                 fontSize: '0.8125rem',
-                color: 'rgba(10,10,10,0.55)',
+                color: '#555555',
                 lineHeight: 1.5,
               }}
             >
@@ -131,13 +125,14 @@ export default function Schedule() {
             </motion.p>
           </div>
 
-          {/* Right: CTA */}
+          {/* Right: CTA card */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={inView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.7, delay: 0.3 }}
             style={{
-              backgroundColor: '#0A0A0A',
+              backgroundColor: '#1A1A1A',
+              border: '1px solid rgba(255,255,255,0.1)',
               padding: '2.5rem',
               display: 'flex',
               flexDirection: 'column',
@@ -151,7 +146,7 @@ export default function Schedule() {
                 fontWeight: 700,
                 letterSpacing: '0.2em',
                 textTransform: 'uppercase',
-                color: '#C9A84C',
+                color: '#FFFFFF',
                 marginBottom: '0.75rem',
               }}>
                 Reservas
@@ -181,8 +176,8 @@ export default function Schedule() {
               alignItems: 'center',
               gap: '0.75rem',
               padding: '1rem',
-              border: '1px solid rgba(201,168,76,0.2)',
-              backgroundColor: 'rgba(201,168,76,0.04)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              backgroundColor: 'rgba(255,255,255,0.03)',
             }}>
               <div style={{
                 width: 40,

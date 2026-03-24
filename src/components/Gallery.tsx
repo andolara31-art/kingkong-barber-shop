@@ -3,11 +3,11 @@ import { motion, useInView, AnimatePresence } from 'framer-motion'
 
 const photos = [
   { src: '/images/gallery-fade-tattoo.jpg', alt: 'Fade limpio con tattoo en cuello', aspect: 'portrait' },
-  { src: '/images/hero-barber.jpg',         alt: 'Barbero trabajando diseño complejo', aspect: 'landscape' },
+  { src: '/images/hero-barber.jpg',          alt: 'Barbero trabajando diseño complejo', aspect: 'landscape' },
   { src: '/images/gallery-fade-lateral.jpg', alt: 'Fade lateral con textura arriba', aspect: 'portrait' },
-  { src: '/images/services-beard.jpg',       alt: 'Afeitado con navaja recta', aspect: 'portrait' },
-  { src: '/images/gallery-fade-alto.jpg',    alt: 'Fade alto en progreso', aspect: 'portrait' },
-  { src: '/images/team-2.jpg',               alt: 'Barbero artesano trabajando', aspect: 'landscape' },
+  { src: '/images/services-beard.jpg',        alt: 'Afeitado con navaja recta', aspect: 'portrait' },
+  { src: '/images/gallery-fade-alto.jpg',     alt: 'Fade alto en progreso', aspect: 'portrait' },
+  { src: '/images/team-2.jpg',                alt: 'Barbero artesano trabajando', aspect: 'landscape' },
 ]
 
 function PhotoCard({ photo, index, onClick }: {
@@ -30,7 +30,6 @@ function PhotoCard({ photo, index, onClick }: {
         overflow: 'hidden',
         cursor: 'none',
         backgroundColor: '#1A1A1A',
-        gridRow: photo.aspect === 'landscape' ? 'span 1' : 'span 1',
         aspectRatio: photo.aspect === 'landscape' ? '4/3' : '3/4',
       }}
       whileHover={{ scale: 1.01 }}
@@ -49,6 +48,7 @@ function PhotoCard({ photo, index, onClick }: {
         onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.05)')}
         onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}
       />
+
       {/* Hover overlay */}
       <motion.div
         initial={{ opacity: 0 }}
@@ -56,7 +56,7 @@ function PhotoCard({ photo, index, onClick }: {
         style={{
           position: 'absolute',
           inset: 0,
-          backgroundColor: 'rgba(10,10,10,0.5)',
+          backgroundColor: 'rgba(10,10,10,0.55)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -65,12 +65,12 @@ function PhotoCard({ photo, index, onClick }: {
         <div style={{
           width: 48,
           height: 48,
-          border: '1.5px solid rgba(201,168,76,0.8)',
+          border: '1.5px solid rgba(255,255,255,0.7)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
         }}>
-          <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth={1.5} style={{ width: 20, height: 20 }}>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth={1.5} style={{ width: 20, height: 20 }}>
             <path d="m21 21-6-6m6 6v-4.8m0 4.8h-4.8" />
             <path d="M3 16.2V21m0 0h4.8M3 21l6-6" />
             <path d="M21 7.8V3m0 0h-4.8M21 3l-6 6" />
@@ -79,14 +79,14 @@ function PhotoCard({ photo, index, onClick }: {
         </div>
       </motion.div>
 
-      {/* Gold corner accent */}
+      {/* White bottom accent */}
       <div style={{
         position: 'absolute',
         bottom: 0,
         left: 0,
         width: '40%',
         height: 1,
-        background: 'linear-gradient(90deg, rgba(201,168,76,0.6), transparent)',
+        background: 'linear-gradient(90deg, rgba(255,255,255,0.4), transparent)',
       }} />
     </motion.div>
   )
@@ -112,6 +112,18 @@ function Lightbox({ photo, onClose, onPrev, onNext }: {
     }
   }, [onClose, onPrev, onNext])
 
+  const btnStyle: React.CSSProperties = {
+    background: 'rgba(10,10,10,0.7)',
+    border: '1px solid rgba(255,255,255,0.2)',
+    color: '#FFFFFF',
+    width: 44,
+    height: 44,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    cursor: 'none',
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -122,7 +134,7 @@ function Lightbox({ photo, onClose, onPrev, onNext }: {
       style={{
         position: 'fixed',
         inset: 0,
-        backgroundColor: 'rgba(0,0,0,0.93)',
+        backgroundColor: 'rgba(0,0,0,0.94)',
         zIndex: 1000,
         display: 'flex',
         alignItems: 'center',
@@ -130,7 +142,6 @@ function Lightbox({ photo, onClose, onPrev, onNext }: {
         padding: '1.5rem',
       }}
     >
-      {/* Image */}
       <motion.img
         key={photo.src}
         initial={{ scale: 0.9, opacity: 0 }}
@@ -140,92 +151,32 @@ function Lightbox({ photo, onClose, onPrev, onNext }: {
         src={photo.src}
         alt={photo.alt}
         onClick={e => e.stopPropagation()}
-        style={{
-          maxWidth: '90vw',
-          maxHeight: '85vh',
-          objectFit: 'contain',
-          boxShadow: '0 0 80px rgba(0,0,0,0.8)',
-        }}
+        style={{ maxWidth: '90vw', maxHeight: '85vh', objectFit: 'contain', boxShadow: '0 0 80px rgba(0,0,0,0.8)' }}
       />
 
       {/* Close */}
-      <button
-        onClick={onClose}
-        aria-label="Cerrar"
-        style={{
-          position: 'absolute',
-          top: '1rem',
-          right: '1rem',
-          background: 'rgba(201,168,76,0.1)',
-          border: '1px solid rgba(201,168,76,0.3)',
-          color: '#C9A84C',
-          width: 44,
-          height: 44,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          cursor: 'none',
-          transition: 'background 0.2s ease',
-        }}
-        onMouseEnter={e => (e.currentTarget.style.background = 'rgba(201,168,76,0.2)')}
-        onMouseLeave={e => (e.currentTarget.style.background = 'rgba(201,168,76,0.1)')}
-      >
+      <button onClick={onClose} aria-label="Cerrar" style={{ ...btnStyle, position: 'absolute', top: '1rem', right: '1rem' }}>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} style={{ width: 18, height: 18 }}>
           <path d="M18 6 6 18M6 6l12 12" />
         </svg>
       </button>
 
       {/* Prev */}
-      <button
-        onClick={e => { e.stopPropagation(); onPrev() }}
-        aria-label="Anterior"
-        style={{
-          position: 'absolute',
-          left: '1rem',
-          top: '50%',
-          transform: 'translateY(-50%)',
-          background: 'rgba(10,10,10,0.7)',
-          border: '1px solid rgba(201,168,76,0.3)',
-          color: '#C9A84C',
-          width: 44,
-          height: 44,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          cursor: 'none',
-        }}
-      >
+      <button onClick={e => { e.stopPropagation(); onPrev() }} aria-label="Anterior"
+        style={{ ...btnStyle, position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)' }}>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} style={{ width: 18, height: 18 }}>
           <path d="m15 18-6-6 6-6" />
         </svg>
       </button>
 
       {/* Next */}
-      <button
-        onClick={e => { e.stopPropagation(); onNext() }}
-        aria-label="Siguiente"
-        style={{
-          position: 'absolute',
-          right: '1rem',
-          top: '50%',
-          transform: 'translateY(-50%)',
-          background: 'rgba(10,10,10,0.7)',
-          border: '1px solid rgba(201,168,76,0.3)',
-          color: '#C9A84C',
-          width: 44,
-          height: 44,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          cursor: 'none',
-        }}
-      >
+      <button onClick={e => { e.stopPropagation(); onNext() }} aria-label="Siguiente"
+        style={{ ...btnStyle, position: 'absolute', right: '1rem', top: '50%', transform: 'translateY(-50%)' }}>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} style={{ width: 18, height: 18 }}>
           <path d="m9 18 6-6-6-6" />
         </svg>
       </button>
 
-      {/* Caption */}
       <div style={{
         position: 'absolute',
         bottom: '1.5rem',
@@ -233,7 +184,7 @@ function Lightbox({ photo, onClose, onPrev, onNext }: {
         transform: 'translateX(-50%)',
         fontFamily: 'var(--font-body)',
         fontSize: '0.8125rem',
-        color: 'rgba(245,245,245,0.6)',
+        color: 'rgba(245,245,245,0.5)',
         letterSpacing: '0.06em',
         whiteSpace: 'nowrap',
       }}>
@@ -249,15 +200,8 @@ export default function Gallery() {
   const titleInView = useInView(titleRef, { once: true, margin: '-60px' })
 
   return (
-    <section
-      id="galeria"
-      style={{
-        backgroundColor: '#111111',
-        padding: 'clamp(4rem, 8vw, 7rem) 0',
-      }}
-    >
+    <section id="galeria" style={{ backgroundColor: '#111111', padding: 'clamp(4rem, 8vw, 7rem) 0' }}>
       <div className="container-site">
-        {/* Header */}
         <div ref={titleRef} style={{ marginBottom: '3rem' }}>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
@@ -280,31 +224,17 @@ export default function Gallery() {
             }}
           >
             NUESTRO TRABAJO<br />
-            <span style={{ color: '#C9A84C' }}>HABLA SOLO</span>
+            <span style={{ color: '#FFFFFF' }}>HABLA SOLO</span>
           </motion.h2>
         </div>
 
-        {/* Bento grid */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          gridTemplateRows: 'auto',
-          gap: 4,
-        }}
-          className="gallery-grid"
-        >
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 4 }} className="gallery-grid">
           {photos.map((photo, i) => (
-            <PhotoCard
-              key={photo.src}
-              photo={photo}
-              index={i}
-              onClick={() => setLightboxIdx(i)}
-            />
+            <PhotoCard key={photo.src} photo={photo} index={i} onClick={() => setLightboxIdx(i)} />
           ))}
         </div>
       </div>
 
-      {/* Lightbox */}
       <AnimatePresence>
         {lightboxIdx !== null && (
           <Lightbox
@@ -318,9 +248,7 @@ export default function Gallery() {
 
       <style>{`
         @media (max-width: 640px) {
-          .gallery-grid {
-            grid-template-columns: repeat(2, 1fr) !important;
-          }
+          .gallery-grid { grid-template-columns: repeat(2, 1fr) !important; }
         }
       `}</style>
     </section>

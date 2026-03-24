@@ -28,10 +28,7 @@ function BarberCard({ barber, index }: { barber: typeof barbers[0]; index: numbe
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
-  })
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
   const imgY = useTransform(scrollYProgress, [0, 1], ['-8%', '8%'])
 
   return (
@@ -40,7 +37,6 @@ function BarberCard({ barber, index }: { barber: typeof barbers[0]; index: numbe
       initial={{ opacity: 0, y: 50 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.8, delay: index * 0.2, ease: [0.22, 1, 0.36, 1] }}
-      style={{ position: 'relative' }}
     >
       {/* Photo */}
       <div style={{
@@ -73,27 +69,18 @@ function BarberCard({ barber, index }: { barber: typeof barbers[0]; index: numbe
           background: 'linear-gradient(to top, rgba(10,10,10,0.9) 0%, rgba(10,10,10,0.2) 60%, transparent 100%)',
         }} />
 
-        {/* Quote overlay */}
-        <div style={{
-          position: 'absolute',
-          bottom: '1.5rem',
-          left: '1.5rem',
-          right: '1.5rem',
-        }}>
+        {/* Quote */}
+        <div style={{ position: 'absolute', bottom: '1.5rem', left: '1.5rem', right: '1.5rem' }}>
           <p style={{
             fontFamily: 'var(--font-accent)',
             fontSize: '1rem',
-            color: 'rgba(245,245,245,0.75)',
+            color: 'rgba(245,245,245,0.7)',
             lineHeight: 1.4,
             marginBottom: '0.75rem',
           }}>
             "{barber.quote}"
           </p>
-          <div style={{
-            width: '2.5rem',
-            height: '1.5px',
-            backgroundColor: '#C9A84C',
-          }} />
+          <div style={{ width: '2.5rem', height: '1.5px', backgroundColor: '#FFFFFF', opacity: 0.4 }} />
         </div>
 
         {/* Number */}
@@ -103,7 +90,7 @@ function BarberCard({ barber, index }: { barber: typeof barbers[0]; index: numbe
           right: '1rem',
           fontFamily: 'var(--font-display)',
           fontSize: '5rem',
-          color: 'rgba(201,168,76,0.08)',
+          color: 'rgba(255,255,255,0.05)',
           lineHeight: 1,
           userSelect: 'none',
         }}>
@@ -117,7 +104,7 @@ function BarberCard({ barber, index }: { barber: typeof barbers[0]; index: numbe
           fontFamily: 'var(--font-display)',
           fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)',
           letterSpacing: '0.06em',
-          color: '#C9A84C',
+          color: '#FFFFFF',
           marginBottom: '0.25rem',
           lineHeight: 1,
         }}>
@@ -152,15 +139,8 @@ export default function Team() {
   const titleInView = useInView(titleRef, { once: true, margin: '-60px' })
 
   return (
-    <section
-      id="equipo"
-      style={{
-        backgroundColor: '#0A0A0A',
-        padding: 'clamp(4rem, 8vw, 7rem) 0',
-      }}
-    >
+    <section id="equipo" style={{ backgroundColor: '#0A0A0A', padding: 'clamp(4rem, 8vw, 7rem) 0' }}>
       <div className="container-site">
-        {/* Header */}
         <div ref={titleRef} style={{ marginBottom: '4rem' }}>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
@@ -183,35 +163,21 @@ export default function Team() {
             }}
           >
             LOS<br />
-            <span style={{ color: '#C9A84C' }}>ARTISTAS</span>
+            <span style={{ color: '#FFFFFF' }}>ARTISTAS</span>
           </motion.h2>
         </div>
 
-        {/* Grid */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-          gap: '3rem',
-          maxWidth: 800,
-        }}>
-          {barbers.map((b, i) => (
-            <BarberCard key={b.id} barber={b} index={i} />
-          ))}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '3rem', maxWidth: 800 }}>
+          {barbers.map((b, i) => <BarberCard key={b.id} barber={b} index={i} />)}
         </div>
 
-        {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={titleInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.6 }}
           style={{ marginTop: '3rem' }}
         >
-          <a
-            href={WA_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-outline-gold"
-          >
+          <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="btn-outline-gold">
             Reservar con tu barbero →
           </a>
         </motion.div>

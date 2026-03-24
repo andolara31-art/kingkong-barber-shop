@@ -3,7 +3,6 @@ import { motion } from 'framer-motion'
 
 const WA_LINK = 'https://wa.me/50661703398?text=Hola%20King%20Kong%20Barber%20Shop%2C%20quiero%20reservar%20una%20cita%20%F0%9F%92%88'
 
-// Letter-by-letter animation helper
 function AnimatedText({ text, delay = 0, style }: { text: string; delay?: number; style?: React.CSSProperties }) {
   return (
     <span style={{ display: 'inline-block', overflow: 'hidden', ...style }}>
@@ -12,11 +11,7 @@ function AnimatedText({ text, delay = 0, style }: { text: string; delay?: number
           key={i}
           initial={{ y: '110%', opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{
-            duration: 0.5,
-            delay: delay + i * 0.04,
-            ease: [0.22, 1, 0.36, 1],
-          }}
+          transition={{ duration: 0.5, delay: delay + i * 0.04, ease: [0.22, 1, 0.36, 1] }}
           style={{ display: 'inline-block' }}
         >
           {char === ' ' ? '\u00A0' : char}
@@ -26,7 +21,6 @@ function AnimatedText({ text, delay = 0, style }: { text: string; delay?: number
   )
 }
 
-// Gold particle
 function Particle({ x, y, delay }: { x: number; y: number; delay: number }) {
   return (
     <motion.div
@@ -34,24 +28,15 @@ function Particle({ x, y, delay }: { x: number; y: number; delay: number }) {
         position: 'absolute',
         left: `${x}%`,
         top: `${y}%`,
-        width: 3,
-        height: 3,
+        width: 2,
+        height: 2,
         borderRadius: '50%',
-        backgroundColor: '#C9A84C',
+        backgroundColor: 'rgba(255,255,255,0.5)',
         pointerEvents: 'none',
       }}
       initial={{ opacity: 0, scale: 0 }}
-      animate={{
-        opacity: [0, 0.6, 0],
-        scale: [0, 1, 0],
-        y: [0, -40, -80],
-      }}
-      transition={{
-        duration: 4,
-        delay,
-        repeat: Infinity,
-        ease: 'easeInOut',
-      }}
+      animate={{ opacity: [0, 0.5, 0], scale: [0, 1, 0], y: [0, -40, -80] }}
+      transition={{ duration: 4, delay, repeat: Infinity, ease: 'easeInOut' }}
     />
   )
 }
@@ -89,7 +74,6 @@ export default function Hero() {
         backgroundColor: '#0A0A0A',
       }}
     >
-      {/* Background image */}
       <img
         ref={imgRef}
         src="/images/hero-barber.jpg"
@@ -107,17 +91,14 @@ export default function Hero() {
         }}
       />
 
-      {/* Gradient overlay */}
+      {/* Overlay */}
       <div style={{
         position: 'absolute',
         inset: 0,
-        background: 'linear-gradient(to bottom, rgba(10,10,10,0.3) 0%, rgba(10,10,10,0.6) 50%, rgba(10,10,10,0.85) 100%)',
+        background: 'linear-gradient(to bottom, rgba(10,10,10,0.35) 0%, rgba(10,10,10,0.62) 50%, rgba(10,10,10,0.88) 100%)',
       }} />
 
-      {/* Particles */}
-      {PARTICLES.map(p => (
-        <Particle key={p.id} x={p.x} y={p.y} delay={p.delay} />
-      ))}
+      {PARTICLES.map(p => <Particle key={p.id} x={p.x} y={p.y} delay={p.delay} />)}
 
       {/* Content */}
       <div style={{
@@ -137,20 +118,20 @@ export default function Hero() {
             display: 'inline-flex',
             alignItems: 'center',
             gap: '0.5rem',
-            border: '1px solid rgba(201,168,76,0.4)',
+            border: '1px solid rgba(255,255,255,0.25)',
             padding: '0.375rem 1rem',
             marginBottom: '1.5rem',
-            backgroundColor: 'rgba(201,168,76,0.06)',
+            backgroundColor: 'rgba(255,255,255,0.04)',
           }}
         >
-          <span style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#C9A84C', flexShrink: 0, display: 'inline-block' }} />
+          <span style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#FFFFFF', flexShrink: 0, display: 'inline-block' }} />
           <span style={{
             fontFamily: 'var(--font-body)',
             fontSize: '0.6875rem',
             fontWeight: 600,
             letterSpacing: '0.2em',
             textTransform: 'uppercase',
-            color: '#C9A84C',
+            color: '#FFFFFF',
           }}>PALMARES, ALAJUELA</span>
         </motion.div>
 
@@ -172,7 +153,7 @@ export default function Hero() {
           fontFamily: 'var(--font-display)',
           fontSize: 'clamp(36px, 7vw, 72px)',
           lineHeight: 1,
-          color: '#C9A84C',
+          color: '#FFFFFF',
           marginBottom: '1.5rem',
           letterSpacing: '0.08em',
         }}>
@@ -187,7 +168,7 @@ export default function Hero() {
           style={{
             fontFamily: 'var(--font-accent)',
             fontSize: 'clamp(1rem, 2.5vw, 1.375rem)',
-            color: 'rgba(245,245,245,0.85)',
+            color: 'rgba(245,245,245,0.8)',
             marginBottom: '2.5rem',
             lineHeight: 1.5,
           }}
@@ -231,10 +212,6 @@ export default function Hero() {
           bottom: '2rem',
           left: '50%',
           transform: 'translateX(-50%)',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '0.5rem',
         }}
       >
         <motion.div
@@ -243,7 +220,7 @@ export default function Hero() {
           style={{
             width: 1,
             height: 48,
-            background: 'linear-gradient(to bottom, rgba(201,168,76,0.8), transparent)',
+            background: 'linear-gradient(to bottom, rgba(255,255,255,0.6), transparent)',
           }}
         />
       </motion.div>

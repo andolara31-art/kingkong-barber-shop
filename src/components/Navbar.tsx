@@ -2,12 +2,23 @@ import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 
 const WA_LINK = 'https://wa.me/50661703398?text=Hola%20King%20Kong%20Barber%20Shop%2C%20quiero%20reservar%20una%20cita%20%F0%9F%92%88'
+const IG_LINK = 'https://www.instagram.com/kinkongbarber.shop'
 
-const links = [
+const navLinks = [
   { label: 'Servicios', href: '#servicios' },
   { label: 'Galería', href: '#galeria' },
   { label: 'Horarios', href: '#horarios' },
 ]
+
+function InstagramIcon({ size = 16 }: { size?: number }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" style={{ width: size, height: size }}>
+      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+    </svg>
+  )
+}
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -25,6 +36,18 @@ export default function Navbar() {
     if (el) el.scrollIntoView({ behavior: 'smooth' })
   }
 
+  const linkStyle = {
+    fontFamily: 'var(--font-body)',
+    fontSize: '0.8125rem',
+    fontWeight: 500 as const,
+    letterSpacing: '0.1em',
+    textTransform: 'uppercase' as const,
+    color: '#AAAAAA',
+    textDecoration: 'none',
+    transition: 'color 0.2s ease',
+    cursor: 'none',
+  }
+
   return (
     <motion.nav
       initial={{ y: -80, opacity: 0 }}
@@ -39,11 +62,12 @@ export default function Navbar() {
         transition: 'background 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease',
         backgroundColor: scrolled ? 'rgba(10,10,10,0.97)' : 'transparent',
         backdropFilter: scrolled ? 'blur(12px)' : 'none',
-        boxShadow: scrolled ? '0 1px 0 rgba(201,168,76,0.12)' : 'none',
+        boxShadow: scrolled ? '0 1px 0 rgba(255,255,255,0.06)' : 'none',
       }}
     >
       <div className="container-site">
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 72 }}>
+
           {/* Logo */}
           <a
             href="#"
@@ -55,7 +79,7 @@ export default function Navbar() {
               height: 44,
               borderRadius: '50%',
               overflow: 'hidden',
-              border: '1.5px solid rgba(201,168,76,0.4)',
+              border: '1.5px solid rgba(255,255,255,0.25)',
               flexShrink: 0,
             }}>
               <img
@@ -77,7 +101,7 @@ export default function Navbar() {
                 fontFamily: 'var(--font-body)',
                 fontSize: '0.6rem',
                 letterSpacing: '0.25em',
-                color: '#C9A84C',
+                color: '#FFFFFF',
                 textTransform: 'uppercase',
                 lineHeight: 1,
                 marginTop: 2,
@@ -86,29 +110,33 @@ export default function Navbar() {
           </a>
 
           {/* Desktop links */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }} className="hidden-mobile">
-            {links.map(link => (
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1.75rem' }} className="hidden-mobile">
+            {navLinks.map(link => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={e => { e.preventDefault(); handleNavClick(link.href) }}
-                style={{
-                  fontFamily: 'var(--font-body)',
-                  fontSize: '0.8125rem',
-                  fontWeight: 500,
-                  letterSpacing: '0.1em',
-                  textTransform: 'uppercase',
-                  color: '#AAAAAA',
-                  textDecoration: 'none',
-                  transition: 'color 0.2s ease',
-                  cursor: 'none',
-                }}
-                onMouseEnter={e => (e.currentTarget.style.color = '#C9A84C')}
+                style={linkStyle}
+                onMouseEnter={e => (e.currentTarget.style.color = '#FFFFFF')}
                 onMouseLeave={e => (e.currentTarget.style.color = '#AAAAAA')}
               >
                 {link.label}
               </a>
             ))}
+
+            {/* Instagram icon */}
+            <a
+              href={IG_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              style={{ ...linkStyle, display: 'flex', alignItems: 'center' }}
+              onMouseEnter={e => (e.currentTarget.style.color = '#FFFFFF')}
+              onMouseLeave={e => (e.currentTarget.style.color = '#AAAAAA')}
+            >
+              <InstagramIcon size={17} />
+            </a>
+
             <a
               href={WA_LINK}
               target="_blank"
@@ -124,13 +152,7 @@ export default function Navbar() {
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Menú"
-            style={{
-              background: 'none',
-              border: 'none',
-              padding: '0.5rem',
-              cursor: 'none',
-              display: 'none',
-            }}
+            style={{ background: 'none', border: 'none', padding: '0.5rem', cursor: 'none', display: 'none' }}
             className="show-mobile"
           >
             <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
@@ -147,7 +169,7 @@ export default function Navbar() {
                     display: 'block',
                     width: 24,
                     height: 1.5,
-                    backgroundColor: '#C9A84C',
+                    backgroundColor: '#FFFFFF',
                     transformOrigin: 'center',
                   }}
                 />
@@ -165,31 +187,41 @@ export default function Navbar() {
         style={{
           overflow: 'hidden',
           backgroundColor: 'rgba(10,10,10,0.98)',
-          borderTop: menuOpen ? '1px solid rgba(201,168,76,0.1)' : 'none',
+          borderTop: menuOpen ? '1px solid rgba(255,255,255,0.08)' : 'none',
         }}
       >
         <div className="container-site" style={{ paddingBlock: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          {links.map(link => (
+          {navLinks.map(link => (
             <a
               key={link.href}
               href={link.href}
               onClick={e => { e.preventDefault(); handleNavClick(link.href) }}
               style={{
-                fontFamily: 'var(--font-body)',
+                ...linkStyle,
                 fontSize: '0.9375rem',
-                fontWeight: 500,
-                letterSpacing: '0.1em',
-                textTransform: 'uppercase',
-                color: '#AAAAAA',
-                textDecoration: 'none',
                 padding: '0.5rem 0',
                 borderBottom: '1px solid rgba(255,255,255,0.05)',
-                cursor: 'none',
               }}
             >
               {link.label}
             </a>
           ))}
+          <a
+            href={IG_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              ...linkStyle,
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              fontSize: '0.9375rem',
+              padding: '0.5rem 0',
+              borderBottom: '1px solid rgba(255,255,255,0.05)',
+            }}
+          >
+            <InstagramIcon size={15} /> Instagram
+          </a>
           <a
             href={WA_LINK}
             target="_blank"

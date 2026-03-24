@@ -8,41 +8,18 @@ export default function ThePlace() {
   const titleRef = useRef<HTMLDivElement>(null)
   const titleInView = useInView(titleRef, { once: true, margin: '-60px' })
 
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
-  })
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
   const bgY = useTransform(scrollYProgress, [0, 1], ['-10%', '10%'])
 
   return (
-    <section
-      id="lugar"
-      ref={ref}
-      style={{
-        position: 'relative',
-        overflow: 'hidden',
-        minHeight: 600,
-        backgroundColor: '#0A0A0A',
-      }}
-    >
+    <section id="lugar" ref={ref} style={{ position: 'relative', overflow: 'hidden', minHeight: 600, backgroundColor: '#0A0A0A' }}>
       {/* Parallax background */}
-      <motion.div
-        style={{
-          position: 'absolute',
-          inset: '-10%',
-          y: bgY,
-        }}
-      >
+      <motion.div style={{ position: 'absolute', inset: '-10%', y: bgY }}>
         <img
           src="/images/interior.jpg"
           alt="Interior King Kong Barber Shop — pared de mármol blanco y dorado"
           loading="lazy"
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            objectPosition: 'center',
-          }}
+          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
         />
       </motion.div>
 
@@ -50,7 +27,7 @@ export default function ThePlace() {
       <div style={{
         position: 'absolute',
         inset: 0,
-        background: 'linear-gradient(135deg, rgba(10,10,10,0.82) 0%, rgba(10,10,10,0.55) 60%, rgba(10,10,10,0.75) 100%)',
+        background: 'linear-gradient(135deg, rgba(10,10,10,0.85) 0%, rgba(10,10,10,0.6) 60%, rgba(10,10,10,0.78) 100%)',
       }} />
 
       {/* Content */}
@@ -89,50 +66,30 @@ export default function ThePlace() {
           }}
         >
           BIENVENIDO<br />
-          <span style={{ color: '#C9A84C' }}>AL REINO</span>
+          <span style={{ color: '#FFFFFF' }}>AL REINO</span>
         </motion.h2>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={titleInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.3 }}
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '0.5rem',
-            maxWidth: 480,
-          }}
+          style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', maxWidth: 480 }}
         >
           {[
-            { icon: '📍', text: 'Palmares, Alajuela, Costa Rica' },
-            { icon: '🏢', text: 'Contiguo a Mundo Cosmético' },
-            { icon: '🏬', text: 'Segundo piso, tienda Bambú' },
-          ].map((item, i) => (
+            'Palmares, Alajuela, Costa Rica',
+            'Contiguo a Mundo Cosmético',
+            'Segundo piso, tienda Bambú',
+          ].map((text, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, x: -16 }}
               animate={titleInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.4 + i * 0.1 }}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.75rem',
-              }}
+              style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}
             >
-              <div style={{
-                width: 4,
-                height: 4,
-                borderRadius: '50%',
-                backgroundColor: '#C9A84C',
-                flexShrink: 0,
-              }} />
-              <span style={{
-                fontFamily: 'var(--font-body)',
-                fontSize: '0.9375rem',
-                color: 'rgba(245,245,245,0.8)',
-                lineHeight: 1.5,
-              }}>
-                {item.text}
+              <div style={{ width: 4, height: 4, borderRadius: '50%', backgroundColor: '#FFFFFF', flexShrink: 0 }} />
+              <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.9375rem', color: 'rgba(245,245,245,0.8)', lineHeight: 1.5 }}>
+                {text}
               </span>
             </motion.div>
           ))}
@@ -156,14 +113,14 @@ export default function ThePlace() {
         </motion.a>
       </div>
 
-      {/* Decorative gold line */}
+      {/* Bottom divider */}
       <div style={{
         position: 'absolute',
         bottom: 0,
         left: 0,
         right: 0,
         height: 1,
-        background: 'linear-gradient(90deg, transparent, rgba(201,168,76,0.4), transparent)',
+        background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent)',
       }} />
     </section>
   )

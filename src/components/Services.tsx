@@ -20,6 +20,7 @@ const services = [
       </svg>
     ),
     bgImage: null,
+    featured: false,
   },
   {
     id: 'barba',
@@ -39,6 +40,7 @@ const services = [
       </svg>
     ),
     bgImage: '/images/services-beard.jpg',
+    featured: false,
   },
   {
     id: 'combo',
@@ -68,6 +70,7 @@ const services = [
       </svg>
     ),
     bgImage: null,
+    featured: false,
   },
 ]
 
@@ -84,8 +87,8 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
       style={{
         position: 'relative',
         overflow: 'hidden',
-        backgroundColor: service.featured ? 'rgba(201,168,76,0.06)' : '#1A1A1A',
-        border: `1px solid ${service.featured ? 'rgba(201,168,76,0.5)' : 'rgba(255,255,255,0.06)'}`,
+        backgroundColor: service.featured ? 'rgba(255,255,255,0.04)' : '#1A1A1A',
+        border: `1px solid ${service.featured ? 'rgba(255,255,255,0.35)' : 'rgba(255,255,255,0.06)'}`,
         padding: '2rem',
         cursor: 'none',
         transition: 'border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease',
@@ -95,12 +98,12 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
         justifyContent: 'space-between',
       }}
       whileHover={{
-        borderColor: 'rgba(201,168,76,0.6)',
-        boxShadow: '0 0 32px rgba(201,168,76,0.15)',
+        borderColor: 'rgba(255,255,255,0.4)',
+        boxShadow: '0 0 32px rgba(255,255,255,0.08)',
         y: -4,
       }}
     >
-      {/* Background image (barba card) */}
+      {/* BG image overlay (barba card) */}
       {service.bgImage && (
         <>
           <div style={{
@@ -109,12 +112,12 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
             backgroundImage: `url(${service.bgImage})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            opacity: 0.15,
+            opacity: 0.1,
           }} />
           <div style={{
             position: 'absolute',
             inset: 0,
-            background: 'linear-gradient(135deg, rgba(26,26,26,0.9), rgba(26,26,26,0.7))',
+            background: 'linear-gradient(135deg, rgba(26,26,26,0.92), rgba(26,26,26,0.75))',
           }} />
         </>
       )}
@@ -125,7 +128,7 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
           position: 'absolute',
           top: '1rem',
           right: '1rem',
-          background: '#C9A84C',
+          background: '#FFFFFF',
           color: '#0A0A0A',
           fontFamily: 'var(--font-body)',
           fontSize: '0.625rem',
@@ -140,7 +143,7 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
 
       <div style={{ position: 'relative', zIndex: 1 }}>
         {/* Icon */}
-        <div style={{ color: '#C9A84C', marginBottom: '1rem' }}>
+        <div style={{ color: '#FFFFFF', marginBottom: '1rem' }}>
           {service.icon}
         </div>
 
@@ -173,7 +176,7 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
         <span style={{
           fontFamily: 'var(--font-display)',
           fontSize: '2rem',
-          color: '#C9A84C',
+          color: '#FFFFFF',
           letterSpacing: '0.04em',
         }}>
           {service.price}
@@ -188,21 +191,15 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
             fontWeight: 500,
             letterSpacing: '0.1em',
             textTransform: 'uppercase',
-            color: '#C9A84C',
+            color: '#FFFFFF',
             textDecoration: 'none',
-            borderBottom: '1px solid rgba(201,168,76,0.4)',
+            borderBottom: '1px solid rgba(255,255,255,0.3)',
             paddingBottom: 2,
             cursor: 'none',
-            transition: 'color 0.2s ease, border-color 0.2s ease',
+            transition: 'border-color 0.2s ease',
           }}
-          onMouseEnter={e => {
-            e.currentTarget.style.color = '#E2C06E'
-            e.currentTarget.style.borderColor = '#E2C06E'
-          }}
-          onMouseLeave={e => {
-            e.currentTarget.style.color = '#C9A84C'
-            e.currentTarget.style.borderColor = 'rgba(201,168,76,0.4)'
-          }}
+          onMouseEnter={e => (e.currentTarget.style.borderColor = '#FFFFFF')}
+          onMouseLeave={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)')}
         >
           Reservar →
         </a>
@@ -218,13 +215,9 @@ export default function Services() {
   return (
     <section
       id="servicios"
-      style={{
-        backgroundColor: '#0A0A0A',
-        padding: 'clamp(4rem, 8vw, 7rem) 0',
-      }}
+      style={{ backgroundColor: '#0A0A0A', padding: 'clamp(4rem, 8vw, 7rem) 0' }}
     >
       <div className="container-site">
-        {/* Section header */}
         <div ref={titleRef} style={{ marginBottom: '3.5rem' }}>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
@@ -247,11 +240,10 @@ export default function Services() {
             }}
           >
             LO QUE<br />
-            <span style={{ color: '#C9A84C' }}>HACEMOS</span>
+            <span style={{ color: '#FFFFFF' }}>HACEMOS</span>
           </motion.h2>
         </div>
 
-        {/* Cards grid */}
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
@@ -263,7 +255,6 @@ export default function Services() {
           ))}
         </div>
 
-        {/* Footer note */}
         <motion.p
           initial={{ opacity: 0 }}
           animate={titleInView ? { opacity: 1 } : {}}
