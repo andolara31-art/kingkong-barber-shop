@@ -2,12 +2,13 @@ import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 
 const WA_LINK = 'https://wa.me/50661703398?text=Hola%20King%20Kong%20Barber%20Shop%2C%20quiero%20reservar%20una%20cita%20%F0%9F%92%88'
-const IG_LINK = 'https://www.instagram.com/kinkongbarber.shop'
+const IG_LINK = 'https://www.instagram.com/kingkong_barber_/'
+const FB_LINK = 'https://www.facebook.com/share/18Eu5HkkHW/'
 
 const navLinks = [
   { label: 'Servicios', href: '#servicios' },
-  { label: 'Galería', href: '#galeria' },
-  { label: 'Horarios', href: '#horarios' },
+  { label: 'Galería',   href: '#galeria'   },
+  { label: 'Horarios',  href: '#horarios'  },
 ]
 
 function InstagramIcon({ size = 16 }: { size?: number }) {
@@ -16,6 +17,14 @@ function InstagramIcon({ size = 16 }: { size?: number }) {
       <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
       <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
       <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+    </svg>
+  )
+}
+
+function FacebookIcon({ size = 16 }: { size?: number }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" style={{ width: size, height: size }}>
+      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" fill="none" />
     </svg>
   )
 }
@@ -32,21 +41,27 @@ export default function Navbar() {
 
   const handleNavClick = (href: string) => {
     setMenuOpen(false)
-    const el = document.querySelector(href)
-    if (el) el.scrollIntoView({ behavior: 'smooth' })
+    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
   }
 
-  const linkStyle = {
+  const linkStyle: React.CSSProperties = {
     fontFamily: 'var(--font-body)',
     fontSize: '0.8125rem',
-    fontWeight: 500 as const,
+    fontWeight: 500,
     letterSpacing: '0.1em',
-    textTransform: 'uppercase' as const,
-    color: '#AAAAAA',
+    textTransform: 'uppercase',
+    color: '#888888',
     textDecoration: 'none',
     transition: 'color 0.2s ease',
     cursor: 'none',
+    display: 'flex',
+    alignItems: 'center',
   }
+
+  const socialLinks = [
+    { href: IG_LINK, label: 'Instagram', icon: <InstagramIcon size={17} /> },
+    { href: FB_LINK, label: 'Facebook',  icon: <FacebookIcon  size={17} /> },
+  ]
 
   return (
     <motion.nav
@@ -74,104 +89,60 @@ export default function Navbar() {
             onClick={e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
             style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', textDecoration: 'none', cursor: 'none' }}
           >
-            <div style={{
-              width: 44,
-              height: 44,
-              borderRadius: '50%',
-              overflow: 'hidden',
-              border: '1.5px solid rgba(255,255,255,0.25)',
-              flexShrink: 0,
-            }}>
-              <img
-                src="/images/logo.jpg"
-                alt="King Kong Barber Shop Logo"
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                loading="eager"
-              />
+            <div style={{ width: 44, height: 44, borderRadius: '50%', overflow: 'hidden', border: '1.5px solid rgba(255,255,255,0.2)', flexShrink: 0 }}>
+              <img src="/images/logo.jpg" alt="King Kong Barber Shop" style={{ width: '100%', height: '100%', objectFit: 'cover' }} loading="eager" />
             </div>
             <div>
-              <div style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: '1.25rem',
-                letterSpacing: '0.1em',
-                color: '#F5F5F5',
-                lineHeight: 1,
-              }}>KING KONG</div>
-              <div style={{
-                fontFamily: 'var(--font-body)',
-                fontSize: '0.6rem',
-                letterSpacing: '0.25em',
-                color: '#FFFFFF',
-                textTransform: 'uppercase',
-                lineHeight: 1,
-                marginTop: 2,
-              }}>BARBER SHOP</div>
+              <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.25rem', letterSpacing: '0.1em', color: '#F5F5F5', lineHeight: 1 }}>KING KONG</div>
+              <div style={{ fontFamily: 'var(--font-body)', fontSize: '0.6rem', letterSpacing: '0.25em', color: '#FFFFFF', textTransform: 'uppercase', lineHeight: 1, marginTop: 2 }}>BARBER SHOP</div>
             </div>
           </a>
 
-          {/* Desktop links */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1.75rem' }} className="hidden-mobile">
+          {/* Desktop nav */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }} className="hidden-mobile">
             {navLinks.map(link => (
-              <a
-                key={link.href}
-                href={link.href}
+              <a key={link.href} href={link.href}
                 onClick={e => { e.preventDefault(); handleNavClick(link.href) }}
                 style={linkStyle}
                 onMouseEnter={e => (e.currentTarget.style.color = '#FFFFFF')}
-                onMouseLeave={e => (e.currentTarget.style.color = '#AAAAAA')}
+                onMouseLeave={e => (e.currentTarget.style.color = '#888888')}
               >
                 {link.label}
               </a>
             ))}
 
-            {/* Instagram icon */}
-            <a
-              href={IG_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-              style={{ ...linkStyle, display: 'flex', alignItems: 'center' }}
-              onMouseEnter={e => (e.currentTarget.style.color = '#FFFFFF')}
-              onMouseLeave={e => (e.currentTarget.style.color = '#AAAAAA')}
-            >
-              <InstagramIcon size={17} />
-            </a>
+            {/* Social icons */}
+            {socialLinks.map(s => (
+              <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer"
+                aria-label={s.label}
+                style={{ ...linkStyle, gap: 0 }}
+                onMouseEnter={e => (e.currentTarget.style.color = '#FFFFFF')}
+                onMouseLeave={e => (e.currentTarget.style.color = '#888888')}
+              >
+                {s.icon}
+              </a>
+            ))}
 
-            <a
-              href={WA_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-gold"
-              style={{ fontSize: '0.8125rem', padding: '0.625rem 1.5rem' }}
-            >
+            <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="btn-gold" style={{ fontSize: '0.8125rem', padding: '0.625rem 1.5rem' }}>
               Reservar Cita
             </a>
           </div>
 
           {/* Mobile hamburger */}
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Menú"
+          <button onClick={() => setMenuOpen(!menuOpen)} aria-label="Menú"
             style={{ background: 'none', border: 'none', padding: '0.5rem', cursor: 'none', display: 'none' }}
             className="show-mobile"
           >
             <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
               {[0, 1, 2].map(i => (
-                <motion.span
-                  key={i}
+                <motion.span key={i}
                   animate={menuOpen ? {
                     rotate: i === 0 ? 45 : i === 2 ? -45 : 0,
                     y: i === 0 ? 9 : i === 2 ? -9 : 0,
                     opacity: i === 1 ? 0 : 1,
                   } : { rotate: 0, y: 0, opacity: 1 }}
                   transition={{ duration: 0.2 }}
-                  style={{
-                    display: 'block',
-                    width: 24,
-                    height: 1.5,
-                    backgroundColor: '#FFFFFF',
-                    transformOrigin: 'center',
-                  }}
+                  style={{ display: 'block', width: 24, height: 1.5, backgroundColor: '#FFFFFF', transformOrigin: 'center' }}
                 />
               ))}
             </div>
@@ -184,49 +155,32 @@ export default function Navbar() {
         initial={false}
         animate={{ height: menuOpen ? 'auto' : 0, opacity: menuOpen ? 1 : 0 }}
         transition={{ duration: 0.3, ease: 'easeInOut' }}
-        style={{
-          overflow: 'hidden',
-          backgroundColor: 'rgba(10,10,10,0.98)',
-          borderTop: menuOpen ? '1px solid rgba(255,255,255,0.08)' : 'none',
-        }}
+        style={{ overflow: 'hidden', backgroundColor: 'rgba(10,10,10,0.98)', borderTop: menuOpen ? '1px solid rgba(255,255,255,0.07)' : 'none' }}
       >
         <div className="container-site" style={{ paddingBlock: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           {navLinks.map(link => (
-            <a
-              key={link.href}
-              href={link.href}
+            <a key={link.href} href={link.href}
               onClick={e => { e.preventDefault(); handleNavClick(link.href) }}
-              style={{
-                ...linkStyle,
-                fontSize: '0.9375rem',
-                padding: '0.5rem 0',
-                borderBottom: '1px solid rgba(255,255,255,0.05)',
-              }}
+              style={{ ...linkStyle, fontSize: '0.9375rem', padding: '0.5rem 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}
             >
               {link.label}
             </a>
           ))}
-          <a
-            href={IG_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              ...linkStyle,
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              fontSize: '0.9375rem',
-              padding: '0.5rem 0',
-              borderBottom: '1px solid rgba(255,255,255,0.05)',
-            }}
-          >
-            <InstagramIcon size={15} /> Instagram
-          </a>
-          <a
-            href={WA_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-gold"
+
+          {/* Social links in mobile menu */}
+          <div style={{ display: 'flex', gap: '1.5rem', padding: '0.5rem 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+            {socialLinks.map(s => (
+              <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer"
+                style={{ ...linkStyle, gap: '0.4rem', fontSize: '0.9rem' }}
+                onMouseEnter={e => (e.currentTarget.style.color = '#FFFFFF')}
+                onMouseLeave={e => (e.currentTarget.style.color = '#888888')}
+              >
+                {s.icon} {s.label}
+              </a>
+            ))}
+          </div>
+
+          <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="btn-gold"
             style={{ marginTop: '0.5rem', width: '100%', justifyContent: 'center' }}
           >
             Reservar Cita
@@ -235,14 +189,8 @@ export default function Navbar() {
       </motion.div>
 
       <style>{`
-        @media (min-width: 768px) {
-          .hidden-mobile { display: flex !important; }
-          .show-mobile { display: none !important; }
-        }
-        @media (max-width: 767px) {
-          .hidden-mobile { display: none !important; }
-          .show-mobile { display: block !important; }
-        }
+        @media (min-width: 768px) { .hidden-mobile { display: flex !important; } .show-mobile { display: none !important; } }
+        @media (max-width: 767px)  { .hidden-mobile { display: none !important; } .show-mobile { display: block !important; } }
       `}</style>
     </motion.nav>
   )

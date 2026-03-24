@@ -2,7 +2,8 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
 const WA_LINK = 'https://wa.me/50661703398?text=Hola%20King%20Kong%20Barber%20Shop%2C%20quiero%20reservar%20una%20cita%20%F0%9F%92%88'
-const IG_LINK = 'https://www.instagram.com/kinkongbarber.shop'
+const IG_LINK = 'https://www.instagram.com/kingkong_barber_/'
+const FB_LINK = 'https://www.facebook.com/share/18Eu5HkkHW/'
 
 const socialLinks = [
   {
@@ -22,6 +23,15 @@ const socialLinks = [
         <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
         <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
         <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+      </svg>
+    ),
+  },
+  {
+    label: 'Facebook',
+    href: FB_LINK,
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" style={{ width: 16, height: 16 }}>
+        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
       </svg>
     ),
   },
@@ -50,8 +60,7 @@ export default function Footer() {
     <footer ref={ref} style={{ position: 'relative', backgroundColor: '#0A0A0A', overflow: 'hidden' }}>
       {/* Sign background */}
       <div style={{
-        position: 'absolute',
-        inset: 0,
+        position: 'absolute', inset: 0,
         backgroundImage: 'url(/images/sign.jpg)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
@@ -61,53 +70,25 @@ export default function Footer() {
       {/* Top line */}
       <div style={{ height: 1, background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent)' }} />
 
-      <div
-        className="container-site"
-        style={{
-          position: 'relative',
-          zIndex: 1,
-          paddingBlock: 'clamp(3rem, 6vw, 5rem)',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '2rem',
-          textAlign: 'center',
-        }}
-      >
+      <div className="container-site" style={{
+        position: 'relative', zIndex: 1,
+        paddingBlock: 'clamp(3rem, 6vw, 5rem)',
+        display: 'flex', flexDirection: 'column', alignItems: 'center',
+        gap: '2rem', textAlign: 'center',
+      }}>
         {/* Logo */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }}
           style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}
         >
-          <div style={{
-            width: 72,
-            height: 72,
-            borderRadius: '50%',
-            overflow: 'hidden',
-            border: '1.5px solid rgba(255,255,255,0.2)',
-          }}>
+          <div style={{ width: 72, height: 72, borderRadius: '50%', overflow: 'hidden', border: '1.5px solid rgba(255,255,255,0.2)' }}>
             <img src="/images/logo.jpg" alt="King Kong Barber Shop" style={{ width: '100%', height: '100%', objectFit: 'cover' }} loading="lazy" />
           </div>
           <div>
-            <h2 style={{
-              fontFamily: 'var(--font-display)',
-              fontSize: '2.5rem',
-              letterSpacing: '0.08em',
-              color: '#F5F5F5',
-              lineHeight: 0.9,
-              marginBottom: '0.25rem',
-            }}>
+            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '2.5rem', letterSpacing: '0.08em', color: '#F5F5F5', lineHeight: 0.9, marginBottom: '0.25rem' }}>
               KING KONG
             </h2>
-            <p style={{
-              fontFamily: 'var(--font-body)',
-              fontSize: '0.6875rem',
-              letterSpacing: '0.25em',
-              color: '#FFFFFF',
-              textTransform: 'uppercase',
-            }}>
+            <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.6875rem', letterSpacing: '0.25em', color: '#FFFFFF', textTransform: 'uppercase' }}>
               BARBER SHOP
             </p>
           </div>
@@ -115,9 +96,7 @@ export default function Footer() {
 
         {/* Tagline */}
         <motion.p
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.6, delay: 0.2 }}
           style={{ fontFamily: 'var(--font-accent)', fontSize: '1rem', color: 'rgba(245,245,245,0.4)' }}
         >
           Estilo, presencia y precisión.
@@ -125,25 +104,17 @@ export default function Footer() {
 
         {/* Divider */}
         <motion.div
-          initial={{ scaleX: 0 }}
-          animate={inView ? { scaleX: 1 } : {}}
-          transition={{ duration: 0.8, delay: 0.3 }}
+          initial={{ scaleX: 0 }} animate={inView ? { scaleX: 1 } : {}} transition={{ duration: 0.8, delay: 0.3 }}
           style={{ width: '6rem', height: 1, backgroundColor: 'rgba(255,255,255,0.15)', transformOrigin: 'center' }}
         />
 
         {/* Social links */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.4 }}
+          initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.4 }}
           style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap', justifyContent: 'center' }}
         >
           {socialLinks.map(link => (
-            <a
-              key={link.label}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
+            <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer"
               style={linkStyle}
               onMouseEnter={e => (e.currentTarget.style.color = '#FFFFFF')}
               onMouseLeave={e => (e.currentTarget.style.color = '#666666')}
@@ -156,9 +127,7 @@ export default function Footer() {
 
         {/* Copyright */}
         <motion.p
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.5, delay: 0.6 }}
+          initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.5, delay: 0.6 }}
           style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem', color: 'rgba(255,255,255,0.15)', letterSpacing: '0.08em' }}
         >
           © 2025 King Kong Barber Shop — Palmares, Alajuela

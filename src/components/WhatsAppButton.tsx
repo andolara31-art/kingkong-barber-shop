@@ -2,29 +2,103 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const WA_LINK = 'https://wa.me/50661703398?text=Hola%20King%20Kong%20Barber%20Shop%2C%20quiero%20reservar%20una%20cita%20%F0%9F%92%88'
-const IG_LINK = 'https://www.instagram.com/kinkongbarber.shop'
+const IG_LINK = 'https://www.instagram.com/kingkong_barber_/'
+const FB_LINK = 'https://www.facebook.com/share/18Eu5HkkHW/'
+
+type SocialBtn = { href: string; label: string; tooltip: string; bg: string; shadow: string; icon: React.ReactNode }
+
+const socialButtons: SocialBtn[] = [
+  {
+    href: FB_LINK,
+    label: 'Facebook King Kong Barber Shop',
+    tooltip: '@King Kong Barber',
+    bg: '#1877F2',
+    shadow: '0 4px 16px rgba(24,119,242,0.35)',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" style={{ width: 22, height: 22 }}>
+        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+      </svg>
+    ),
+  },
+  {
+    href: IG_LINK,
+    label: 'Instagram King Kong Barber Shop',
+    tooltip: '@kingkong_barber_',
+    bg: 'linear-gradient(135deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D)',
+    shadow: '0 4px 16px rgba(0,0,0,0.35)',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" style={{ width: 22, height: 22 }}>
+        <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+        <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+      </svg>
+    ),
+  },
+]
+
+function FloatingBtn({ btn }: { btn: SocialBtn }) {
+  const [hovered, setHovered] = useState(false)
+
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem' }}>
+      <AnimatePresence>
+        {hovered && (
+          <motion.div
+            initial={{ opacity: 0, x: 10 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 10 }}
+            transition={{ duration: 0.18 }}
+            style={{
+              backgroundColor: '#1A1A1A',
+              border: '1px solid rgba(255,255,255,0.12)',
+              padding: '0.5rem 0.875rem',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem', fontWeight: 600, color: '#F5F5F5', letterSpacing: '0.04em' }}>
+              {btn.tooltip}
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <motion.a
+        href={btn.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={btn.label}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        whileHover={{ scale: 1.08 }}
+        whileTap={{ scale: 0.95 }}
+        style={{
+          width: 50,
+          height: 50,
+          borderRadius: '50%',
+          background: btn.bg,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          boxShadow: btn.shadow,
+          cursor: 'none',
+          textDecoration: 'none',
+          flexShrink: 0,
+        }}
+      >
+        {btn.icon}
+      </motion.a>
+    </div>
+  )
+}
 
 export default function WhatsAppButton() {
   const [visible, setVisible] = useState(false)
   const [waHovered, setWaHovered] = useState(false)
-  const [igHovered, setIgHovered] = useState(false)
 
   useEffect(() => {
     const timer = setTimeout(() => setVisible(true), 2500)
     return () => clearTimeout(timer)
   }, [])
-
-  const btnBase: React.CSSProperties = {
-    width: 52,
-    height: 52,
-    borderRadius: '50%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    cursor: 'none',
-    textDecoration: 'none',
-    flexShrink: 0,
-  }
 
   return (
     <AnimatePresence>
@@ -45,53 +119,10 @@ export default function WhatsAppButton() {
             gap: '0.625rem',
           }}
         >
-          {/* Instagram button */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem' }}>
-            <AnimatePresence>
-              {igHovered && (
-                <motion.div
-                  initial={{ opacity: 0, x: 10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 10 }}
-                  transition={{ duration: 0.18 }}
-                  style={{
-                    backgroundColor: '#1A1A1A',
-                    border: '1px solid rgba(255,255,255,0.15)',
-                    padding: '0.5rem 0.875rem',
-                    whiteSpace: 'nowrap',
-                  }}
-                >
-                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem', fontWeight: 600, color: '#F5F5F5', letterSpacing: '0.04em' }}>
-                    @kinkongbarber.shop
-                  </p>
-                </motion.div>
-              )}
-            </AnimatePresence>
+          {/* Facebook + Instagram */}
+          {socialButtons.map(btn => <FloatingBtn key={btn.label} btn={btn} />)}
 
-            <motion.a
-              href={IG_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram King Kong Barber Shop"
-              onMouseEnter={() => setIgHovered(true)}
-              onMouseLeave={() => setIgHovered(false)}
-              whileHover={{ scale: 1.08 }}
-              whileTap={{ scale: 0.95 }}
-              style={{
-                ...btnBase,
-                background: 'linear-gradient(135deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D)',
-                boxShadow: '0 4px 16px rgba(0,0,0,0.4)',
-              }}
-            >
-              <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" style={{ width: 22, height: 22 }}>
-                <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-              </svg>
-            </motion.a>
-          </div>
-
-          {/* WhatsApp button */}
+          {/* WhatsApp — primary CTA */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem' }}>
             <AnimatePresence>
               {waHovered && (
@@ -102,7 +133,7 @@ export default function WhatsAppButton() {
                   transition={{ duration: 0.18 }}
                   style={{
                     backgroundColor: '#1A1A1A',
-                    border: '1px solid rgba(255,255,255,0.15)',
+                    border: '1px solid rgba(255,255,255,0.12)',
                     padding: '0.5rem 0.875rem',
                     whiteSpace: 'nowrap',
                   }}
@@ -127,11 +158,17 @@ export default function WhatsAppButton() {
               whileHover={{ scale: 1.08 }}
               whileTap={{ scale: 0.95 }}
               style={{
-                ...btnBase,
                 width: 58,
                 height: 58,
+                borderRadius: '50%',
                 backgroundColor: '#25D366',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
                 boxShadow: '0 4px 20px rgba(37,211,102,0.35)',
+                cursor: 'none',
+                textDecoration: 'none',
+                flexShrink: 0,
               }}
             >
               <svg viewBox="0 0 24 24" fill="white" style={{ width: 28, height: 28 }}>
