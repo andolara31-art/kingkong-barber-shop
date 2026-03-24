@@ -1,0 +1,221 @@
+@import "tailwindcss";
+
+/* ============================================================
+   KING KONG BARBER SHOP — DESIGN SYSTEM
+   Dark Premium × Gold Accent × Editorial Masculine
+   ============================================================ */
+
+@theme {
+  /* Brand Colors */
+  --color-void:     #0A0A0A;
+  --color-carbon:   #111111;
+  --color-obsidian: #1A1A1A;
+  --color-graphite: #2A2A2A;
+  --color-ash:      #3A3A3A;
+  --color-smoke:    #888888;
+  --color-mist:     #AAAAAA;
+  --color-bone:     #F5F5F5;
+  --color-pure:     #FFFFFF;
+
+  /* Gold System */
+  --color-gold:       #C9A84C;
+  --color-gold-light: #E2C06E;
+  --color-gold-dark:  #A07830;
+  --color-gold-glow:  rgba(201, 168, 76, 0.15);
+  --color-gold-border: rgba(201, 168, 76, 0.3);
+
+  /* Typography */
+  --font-display: 'Bebas Neue', 'Impact', sans-serif;
+  --font-body:    'Inter', system-ui, -apple-system, sans-serif;
+  --font-accent:  'Playfair Display', Georgia, serif;
+
+  /* Shadows */
+  --shadow-gold: 0 0 24px rgba(201, 168, 76, 0.2);
+  --shadow-gold-lg: 0 0 48px rgba(201, 168, 76, 0.25);
+  --shadow-dark: 0 8px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-void);
+  color: var(--color-bone);
+  line-height: 1.6;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ============================================================
+   TYPOGRAPHY UTILITIES
+   ============================================================ */
+
+.font-display { font-family: var(--font-display); letter-spacing: 0.02em; }
+.font-body    { font-family: var(--font-body); }
+.font-accent  { font-family: var(--font-accent); font-style: italic; }
+
+/* Text gradient gold */
+.text-gold-gradient {
+  background: linear-gradient(135deg, var(--color-gold-dark), var(--color-gold), var(--color-gold-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Section label */
+.section-label {
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+
+.container-site {
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .container-site { padding-inline: 2.5rem; }
+}
+@media (min-width: 1024px) {
+  .container-site { padding-inline: 4rem; }
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--color-gold);
+  color: var(--color-void);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  padding: 0.875rem 2rem;
+  border: 2px solid var(--color-gold);
+  cursor: none;
+  transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn-gold:hover {
+  background: var(--color-gold-light);
+  border-color: var(--color-gold-light);
+  box-shadow: var(--shadow-gold);
+  transform: translateY(-1px);
+}
+
+.btn-outline-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: transparent;
+  color: var(--color-gold);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  padding: 0.75rem 1.75rem;
+  border: 1px solid var(--color-gold-border);
+  cursor: none;
+  transition: border-color 0.25s ease, background 0.25s ease, color 0.25s ease;
+  text-decoration: none;
+}
+
+.btn-outline-gold:hover {
+  border-color: var(--color-gold);
+  background: var(--color-gold-glow);
+  color: var(--color-gold-light);
+}
+
+/* ============================================================
+   GOLD DIVIDER
+   ============================================================ */
+
+.divider-gold {
+  width: 3rem;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-gold), transparent);
+}
+
+/* ============================================================
+   CARDS
+   ============================================================ */
+
+.card-dark {
+  background: var(--color-obsidian);
+  border: 1px solid var(--color-graphite);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  cursor: none;
+}
+
+.card-dark:hover {
+  border-color: var(--color-gold-border);
+  box-shadow: var(--shadow-gold);
+}
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-void); }
+::-webkit-scrollbar-thumb { background: var(--color-gold-dark); border-radius: 3px; }
+
+/* ============================================================
+   FOCUS
+   ============================================================ */
+
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
+  body { cursor: auto; }
+}
+
+/* ============================================================
+   LIGHTBOX LOCK
+   ============================================================ */
+
+body.lightbox-open {
+  overflow: hidden;
+}
